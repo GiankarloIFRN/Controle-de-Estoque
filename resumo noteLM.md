@@ -280,6 +280,3 @@ public class ClasseB extends ClasseA { // 'extends' ativa a herança
 }
 ```
 
----
-
-🛠️ Quer que eu crie um script completo em Java integrando todas essas classes (como `Produto`, `Categoria`, `Fornecedor` e `Endereco`) em um único arquivo de código para execução de teste?

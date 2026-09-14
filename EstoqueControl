@@ -1,0 +1,226 @@
+Java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+// ============================================================================
+// 1. CONCEITO DE POO: CLASSE ABSTRATA E ABSTRAÇÃO
+// A classe "Produto" serve como um molde/modelo genérico para qualquer item.
+// Não faz sentido instanciar um "Produto" genérico, por isso ela é 'abstract'.
+// ============================================================================
+abstract class Produto {
+    // CONCEITO DE POO: ENCAPSULAMENTO
+    // Atributos 'private' e 'protected' só podem ser acessados diretamente pela própria classe 
+    // ou por suas subclasses, protegendo os dados contra alterações indevidas de fora.
+    private int id;
+    private String nome;
+    private double preco;
+    private int quantidade;
+
+    // Construtor: Inicializa os dados do produto quando ele é criado
+    public Produto(int id, String nome, double preco, int quantidade) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidade = quantidade;
+    }
+
+    // Getters e Setters (Métodos de acesso ao Encapsulamento)
+    public int getId() { return id; }
+    public String getNome() { return nome; }
+    public double getPreco() { return preco; }
+    
+    public int getQuantidade() { return quantidade; }
+    
+    // Regra de negócio simples para não permitir quantidade negativa
+    public void setQuantidade(int quantidade) {
+        if (quantidade >= 0) {
+            this.quantidade = quantidade;
+        } else {
+            System.out.println("Erro: A quantidade não pode ser negativa.");
+        }
+    }
+
+    // Método comum para alterar estoque
+    public void adicionarEstoque(int qtd) {
+        this.quantidade += qtd;
+    }
+
+    public boolean removerEstoque(int qtd) {
+        if (qtd <= this.quantidade) {
+            this.quantidade -= qtd;
+            return true;
+        }
+        return false;
+    }
+
+    // CONCEITO DE POO: MÉTODOS ABSTRATOS (Polimorfismo obrigatório)
+    // Cada tipo de produto deve definir como exibe seus detalhes específicos.
+    public abstract void exibirDetalhes();
+}
+
+// ============================================================================
+// 2. CONCEITO DE POO: HERANÇA E POLIMORFISMO
+// "ProdutoEletronico" HERDA tudo da classe "Produto" usando a palavra 'extends'.
+// ============================================================================
+class ProdutoEletronico extends Produto {
+    private int garantiaMeses; // Atributo específico desta subclasse
+
+    public ProdutoEletronico(int id, String nome, double preco, int quantidade, int garantiaMeses) {
+        // 'super' chama o construtor da classe pai (Produto)
+        super(id, nome, preco, quantidade);
+        this.garantiaMeses = garantiaMeses;
+    }
+
+    // POLIMORFISMO (Sobrescrita / @Override):
+    // Sobrescrevemos o método abstrato para fornecer a implementação específica de eletrônicos.
+    @Override
+    public void exibirDetalhes() {
+        System.out.printf("[ELETRÔNICO] ID: %d | Nome: %s | Preço: R$%.2f | Qtd: %d | Garantia: %d meses\n",
+                getId(), getNome(), getPreco(), getQuantidade(), garantiaMeses);
+    }
+}
+
+// Outra subclasse demonstrando HERANÇA
+class ProdutoAlimenticio extends Produto {
+    private String dataValidade; // Atributo específico
+
+    public ProdutoAlimenticio(int id, String nome, double preco, int quantidade, String dataValidade) {
+        super(id, nome, preco, quantidade);
+        this.dataValidade = dataValidade;
+    }
+
+    // POLIMORFISMO (Sobrescrita / @Override)
+    @Override
+    public void exibirDetalhes() {
+        System.out.printf("[ALIMENTO]   ID: %d | Nome: %s | Preço: R$%.2f | Qtd: %d | Validade: %s\n",
+                getId(), getNome(), getPreco(), getQuantidade(), dataValidade);
+    }
+}
+
+// ============================================================================
+// 3. CLASSE DE GERENCIAMENTO (Regras do Sistema)
+// Gerencia a lista de produtos sem se importar com a subclasse específica.
+// ============================================================================
+class GerenciadorEstoque {
+    // Utiliza Generics e a lista guarda instâncias de Produto (Polimorfismo)
+    private List<Produto> estoque = new ArrayList<>();
+
+    public void cadastrarProduto(Produto p) {
+        estoque.add(p);
+        System.out.println("-> Produto cadastrado com sucesso!");
+    }
+
+    public void listarProdutos() {
+        if (estoque.isEmpty()) {
+            System.out.println("Estoque vazio.");
+            return;
+        }
+        System.out.println("\n--- ITENS NO ESTOQUE ---");
+        for (Produto p : estoque) {
+            // CONCEITO DE POO: POLIMORFISMO EM AÇÃO
+            // O Java descobre em tempo de execução qual 'exibirDetalhes()' chamar 
+            // (se é o de Eletronico ou o de Alimenticio).
+            p.exibirDetalhes();
+        }
+    }
+
+    public Produto buscarPorId(int id) {
+        for (Produto p : estoque) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+}
+
+// ============================================================================
+// 4. CLASSE PRINCIPAL (Interface via Console)
+// ============================================================================
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        GerenciadorEstoque sistema = new GerenciadorEstoque();
+        int opcao = 0;
+
+        while (opcao != 5) {
+            System.out.println("\n===== SISTEMA DE CONTROLE DE ESTOQUE =====");
+            System.out.println("1. Cadastrar Produto Eletrônico");
+            System.out.println("2. Cadastrar Produto Alimentício");
+            System.out.println("3. Listar Estoque");
+            System.out.println("4. Dar Baixa / Remover do Estoque");
+            System.out.println("5. Sair");
+            System.out.print("Escolha uma opção: ");
+            
+            opcao = scanner.nextInt();
+            scanner.nextLine(); // Limpar buffer do scanner
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("ID: ");
+                    int idE = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Nome: ");
+                    String nomeE = scanner.nextLine();
+                    System.out.print("Preço: ");
+                    double precoE = scanner.nextDouble();
+                    System.out.print("Quantidade Inicial: ");
+                    int qtdE = scanner.nextInt();
+                    System.out.print("Garantia (meses): ");
+                    int garantia = scanner.nextInt();
+
+                    // Instanciação e polimorfismo ao adicionar
+                    sistema.cadastrarProduto(new ProdutoEletronico(idE, nomeE, precoE, qtdE, garantia));
+                    break;
+
+                case 2:
+                    System.out.print("ID: ");
+                    int idA = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Nome: ");
+                    String nomeA = scanner.nextLine();
+                    System.out.print("Preço: ");
+                    double precoA = scanner.nextDouble();
+                    System.out.print("Quantidade Inicial: ");
+                    int qtdA = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Data de Validade (DD/MM/AAAA): ");
+                    String validade = scanner.nextLine();
+
+                    sistema.cadastrarProduto(new ProdutoAlimenticio(idA, nomeA, precoA, qtdA, validade));
+                    break;
+
+                case 3:
+                    sistema.listarProdutos();
+                    break;
+
+                case 4:
+                    System.out.print("Informe o ID do produto para dar baixa: ");
+                    int idBusca = scanner.nextInt();
+                    Produto p = sistema.buscarPorId(idBusca);
+                    
+                    if (p != null) {
+                        System.out.print("Quantidade a remover: ");
+                        int qtdRemover = scanner.nextInt();
+                        if (p.removerEstoque(qtdRemover)) {
+                            System.out.println("-> Baixa realizada! Nova quantidade: " + p.getQuantidade());
+                        } else {
+                            System.out.println("-> Erro: Quantidade insuficiente em estoque.");
+                        }
+                    } else {
+                        System.out.println("-> Produto não encontrado.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Saindo do sistema...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+        scanner.close();
+    }
+}

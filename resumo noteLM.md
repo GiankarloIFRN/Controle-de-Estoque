@@ -281,4 +281,166 @@ public class ClasseB extends ClasseA { // 'extends' ativa a herança
     public int getB() { return this.b; }
 }
 ```
+Aqui estão exemplos práticos extraídos dos cenários e atividades abordados no material, explicados passo a passo de forma simples:
+
+---
+
+### 1. Modelando Coisas do Mundo Real (Classes, Atributos e Métodos)
+A POO mapeia objetos do mundo real diretamente para o código. Um objeto possui **atributos** (suas características ou estado) e **métodos** (suas ações ou comportamento).
+
+**Exemplo Prático: O Celular e o Carro**
+Quando pensamos em um carro, ele tem características como marca, modelo, cor e quilometragem, além de ações como andar.
+
+```java
+public class Carro {
+    // Atributos (Características)
+    String marca;
+    String modelo;
+    double quilometragem;
+
+    // Método (Ação) - Atualiza a quilometragem ao andar
+    public void andar(double kmPercorrida) {
+        this.quilometragem = this.quilometragem + kmPercorrida; // Atualiza o estado interno
+    }
+
+    // Método que retorna a quilometragem atual do carro
+    public double getQuilometragem() {
+        return this.quilometragem; //
+    }
+}
+```
+* **Como entender de forma fácil**: A classe `Carro` é a planta do veículo. O método `andar()` simula o uso do carro: toda vez que você roda uma distância, o odômetro (a variável `quilometragem`) soma aquele valor.
+
+---
+
+### 2. Encapsulamento e Proteção com Métodos Privados
+O encapsulamento esconde os detalhes internos para proteger o sistema contra alterações indevidas ou acidentais.
+
+#### Exemplo A: Conta de Banco sem Saldo Negativo
+Em um sistema bancário, o atributo `saldo` é definido como **`private`** para que ninguém mude seu valor diretamente (ex.: `conta.saldo = 1000000;`). O dinheiro só muda através de métodos seguros como `sacar()` ou `depositar()`.
+
+```java
+public class ContaBanco {
+    private double saldo; // Atributo protegido
+
+    public void sacar(double valor) {
+        // Validação: não permite que o saldo fique negativo
+        if (this.saldo - valor >= 0) {
+            this.saldo = this.saldo - valor; //
+        } else {
+            System.out.println("Saldo insuficiente!");
+        }
+    }
+}
+```
+
+#### Exemplo B: Métodos Auxiliares Privados (`Aluno`)
+Se você tem uma classe `Aluno` que precisa calcular a situação no curso (média \\(\ge\\) 6) e a aprovação em um projeto de pesquisa (média \\(\ge\\) 7), o cálculo da média se repetiria nos dois métodos. A solução é criar um método **`private`** para calcular a média, que serve apenas como um "auxiliar interno" para os outros métodos da classe.
+
+```java
+public class Aluno {
+    private double nota1;
+    private double nota2;
+
+    // Método interno privado: ninguém de fora precisa chamar este método diretamente
+    private double calcularMedia() {
+        return (nota1 + nota2) / 2; //
+    }
+
+    public String situacaoCurso() {
+        if (calcularMedia() >= 6) { // Reutiliza a média calculada
+            return "APROVADO";
+        } else {
+            return "REPROVADO";
+        }
+    }
+
+    public String situacaoProjeto() {
+        if (calcularMedia() >= 7) { // Reutiliza o mesmo cálculo
+            return "PARTICIPA";
+        } else {
+            return "NÃO PARTICIPA";
+        }
+    }
+}
+```
+
+---
+
+### 3. Relacionamento entre Objetos (Produto, Categoria e Endereço)
+Em vez de colocar todas as informações em um único arquivo de texto ou tabela — o que causaria bagunça, repetição de dados e falhas na alteração de informações —, dividimos as responsabilidades entre objetos que se conectam.
+
+* Se colocássemos o nome do endereço inteiro dentro do `Fornecedor`, os dados ficariam desorganizados e difíceis de consultar. Por isso, criamos a classe `Endereco` separada e conectamos ela ao `Fornecedor`.
+
+```java
+// Classe Endereco com campos organizados
+public class Endereco {
+    private String logradouro;
+    private int numero;
+    private String cidade;
+
+    public Endereco(String logradouro, int numero, String cidade) {
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.cidade = cidade;
+    }
+
+    public String getCidade() { return this.cidade; }
+}
+
+// Classe Fornecedor utilizando um objeto Endereco
+public class Fornecedor {
+    private String nome;
+    private Endereco endereco; // Relacionamento com a classe Endereco
+
+    public Fornecedor(String nome, Endereco endereco) {
+        this.nome = nome;
+        this.endereco = endereco;
+    }
+
+    public Endereco getEndereco() { return this.endereco; }
+}
+
+// Navegando pelos objetos em cadeia:
+// f1.getEndereco().getCidade(); -> Pega o fornecedor, entra no endereço dele e busca a cidade
+```
+
+---
+
+### 4. Herança: Reutilizando Código sem Repetição (`extends` e `super`)
+Quando temos classes diferentes que compartilham as mesmas características (como `Gerente` e `Desenvolvedor`, que são ambos tipos de `Funcionario`), criamos uma **superclasse** com o que é comum e usamos **`extends`** nas subclasses.
+
+```java
+// Superclasse (Pai)
+public class Funcionario {
+    private String nome;
+    private String cpf;
+    private double salario;
+
+    // Construtor pai
+    public Funcionario(String nome, String cpf, double salario) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.salario = salario;
+    }
+}
+
+// Subclasse (Filha) - Herda nome, cpf e salario de Funcionario
+public class Gerente extends Funcionario { //
+    private String senha; // Atributo específico do Gerente
+
+    public Gerente(String nome, String cpf, double salario, String senha) {
+        super(nome, cpf, salario); // 'super' envia os dados para o construtor do pai inicializar
+        this.senha = senha;
+    }
+
+    public boolean autenticar(String senhaInformada) {
+        return this.senha.equals(senhaInformada); //
+    }
+}
+```
+* **Como entender de forma fácil**: O `Gerente` herda tudo o que um `Funcionario` genérico tem (nome, CPF, salário). Usamos a instrução **`super(...)`** para repassar os dados básicos ao pai, permitindo que a filha foque apenas nas suas próprias regras exclusivas (como a `senha` e a ação de `autenticar()`).
+
+---
+
 

@@ -61,6 +61,8 @@ A herança evita que você tenha que "reinventar a roda" ou copiar e colar códi
 * *Exemplo*: Em vez de repetir os campos `nome`, `cpf` e `salario` dentro das classes `Gerente` e `Desenvolvedor`, criamos a classe pai `Funcionario` com esses dados e fazemos `Gerente` e `Desenvolvedor` herdarem dela.
 * No Java, usam-se as palavras **extends** para herdar e **super** para acessar construtores ou métodos do pai. Todas as classes no Java herdam automaticamente de uma classe-mãe universal chamada `Object`.
 
+---
+
 ### 1. Declaração de Classe e Atributos (Estrutura Básica)
 Para definir a estrutura de um objeto no código, declaramos uma **classe** que servirá como seu molde. Dentro do corpo da classe, inserimos os **atributos** (variáveis de instância) que armazenam as características do objeto durante sua execução. 
 

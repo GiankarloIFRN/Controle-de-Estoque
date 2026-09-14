@@ -16,6 +16,7 @@ abstract class Produto {
     private String nome;
     private double preco;
     private int quantidade;
+    
 
     // Construtor: Inicializa os dados do produto quando ele é criado
     public Produto(int id, String nome, double preco, int quantidade) {

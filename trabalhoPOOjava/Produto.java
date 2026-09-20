@@ -1,0 +1,58 @@
+public class Produto {
+    private String nome;
+    private double preco;
+    private int quantidade;
+    private Fornecedor fornecedor;
+
+    public Produto() {
+    }
+
+    public Produto(String nome, double preco, int quantidade, Fornecedor fornecedor) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.fornecedor = fornecedor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }  
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("Produto: " + nome);
+        System.out.println("Preço: R$" + preco);
+        System.out.println("Quantidade em Estoque" + quantidade);
+
+        if (fornecedor != null) {
+            System.out.println("Fornecedor: " + fornecedor.getNome() + " | Tel: " fornecedor.getTelefone()); 
+        } else {
+            System.out.println("Fornecedor: Não cadastrado");
+        }
+
+        System.out.println("\----------------------------------------");
+    }
+}

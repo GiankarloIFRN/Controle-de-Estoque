@@ -1,6 +1,7 @@
+// Observação: Recomenda-se utilizar o arquivo 'Main.java' que foi criado na mesma pasta para evitar erros no javac.
 public class Main {
     public static void main(String[] args) {
-        Fornecedor f1 = new Fornecedor("Distribuidora Silva" , "(00) 00000-0000");
+        Fornecedor f1 = new Fornecedor("Distribuidora Silva", "(00) 00000-0000");
 
         Produto p1 = new Produto("Caderno 10 matérias", 22.50, 40, f1);
         

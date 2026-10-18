@@ -34,7 +34,13 @@ public class Produto {
         return quantidade;
     }
 
+    // Observação: Corrigida a atribuição correta do atributo (era 'return fornecedor;')
     public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    // Observação: Adicionado getter para fornecedor (boa prática de encapsulamento)
+    public Fornecedor getFornecedor() {
         return fornecedor;
     }
 
@@ -45,14 +51,16 @@ public class Produto {
     public void exibirInformacoes() {
         System.out.println("Produto: " + nome);
         System.out.println("Preço: R$" + preco);
-        System.out.println("Quantidade em Estoque" + quantidade);
+        System.out.println("Quantidade em Estoque: " + quantidade);
 
         if (fornecedor != null) {
-            System.out.println("Fornecedor: " + fornecedor.getNome() + " | Tel: " fornecedor.getTelefone()); 
+            // Observação: Inserido operador '+' ausente antes de fornecedor.getTelefone()
+            System.out.println("Fornecedor: " + fornecedor.getNome() + " | Tel: " + fornecedor.getTelefone()); 
         } else {
             System.out.println("Fornecedor: Não cadastrado");
         }
 
-        System.out.println("\----------------------------------------");
+        // Observação: Removida barra de escape inválida '\-'
+        System.out.println("----------------------------------------");
     }
 }

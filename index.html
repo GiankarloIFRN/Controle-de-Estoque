@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <!-- Folha de estilo externa simples e limpa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1>📦 Controle de Estoque</h1>
+            <p>Sistema simples de gerenciamento de produtos e fornecedores</p>
+        </div>
+    </header>
+
+    <main class="container main-content">
+
+        <!-- Resumo / Métricas do Estoque -->
+        <section class="metrics-grid">
+            <div class="card metric-card">
+                <span class="metric-label">Total de Produtos</span>
+                <span class="metric-value" id="total-produtos">0</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-label">Itens em Estoque</span>
+                <span class="metric-value" id="total-itens">0</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-label">Valor Total do Estoque</span>
+                <span class="metric-value highlight" id="valor-total">R$ 0,00</span>
+            </div>
+        </section>
+
+        <!-- Formulário de Cadastro -->
+        <section class="card form-card">
+            <h2>➕ Cadastrar Novo Produto</h2>
+            <form id="form-produto">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nome-produto">Nome do Produto *</label>
+                        <input type="text" id="nome-produto" placeholder="Ex: Caderno 10 matérias" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preco-produto">Preço Unitário (R$) *</label>
+                        <input type="number" id="preco-produto" step="0.01" min="0" placeholder="Ex: 22.50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantidade-produto">Quantidade em Estoque *</label>
+                        <input type="number" id="quantidade-produto" min="0" placeholder="Ex: 40" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome-fornecedor">Nome do Fornecedor</label>
+                        <input type="text" id="nome-fornecedor" placeholder="Ex: Distribuidora Silva">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone-fornecedor">Telefone do Fornecedor</label>
+                        <input type="text" id="telefone-fornecedor" placeholder="Ex: (00) 00000-0000">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
+                    <button type="reset" class="btn btn-secondary">Limpar Campos</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Tabela de Produtos Cadastrados -->
+        <section class="card table-card">
+            <div class="table-header">
+                <h2>📋 Produtos em Estoque</h2>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="tabela-estoque">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço Unitário</th>
+                            <th>Quantidade</th>
+                            <th>Status</th>
+                            <th>Fornecedor</th>
+                            <th>Contato</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-corpo">
+                        <!-- Linhas renderizadas dinamicamente via app.js -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <p>Nenhum produto cadastrado no momento.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Controle de Estoque &copy; 2026 - Programação Orientada a Objetos</p>
+        </div>
+    </footer>
+
+    <!-- Lógica de interação simples para simular o sistema em tempo real -->
+    <script src="app.js"></script>
+</body>
+</html>
+

@@ -3,55 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Estoque</title>
-    <!-- Folha de estilo externa simples e limpa -->
+    <title>Controle de Estoque | Gestão Empresarial</title>
+    <!-- Fonte Corporativa Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Folha de estilo -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Cabeçalho Corporativo -->
     <header class="header">
-        <div class="container">
-            <h1>📦 Controle de Estoque</h1>
-            <p>Sistema simples de gerenciamento de produtos e fornecedores</p>
+        <div class="container header-container">
+            <div class="header-brand">
+                <div class="brand-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                        <path d="m3.3 7 8.7 5 8.7-5"/>
+                        <path d="M12 22V12"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>Controle de Estoque</h1>
+                    <p class="header-subtitle">Painel Integrado de Gestão de Inventário e Fornecedores</p>
+                </div>
+            </div>
+            <div class="header-meta">
+                <div class="system-status">
+                    <span class="status-indicator"></span>
+                    <span>Sistema Operacional</span>
+                </div>
+            </div>
         </div>
     </header>
 
     <main class="container main-content">
 
-        <!-- Resumo / Métricas do Estoque -->
-        <section class="metrics-grid">
+        <!-- Métricas / Indicadores do Estoque -->
+        <section class="metrics-grid" aria-label="Métricas Principais">
             <div class="card metric-card">
-                <span class="metric-label">Total de Produtos</span>
+                <div class="metric-header">
+                    <span class="metric-label">Total de Produtos</span>
+                    <div class="metric-icon-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                    </div>
+                </div>
                 <span class="metric-value" id="total-produtos">0</span>
+                <span class="metric-caption">Produtos cadastrados no catálogo</span>
             </div>
+
             <div class="card metric-card">
-                <span class="metric-label">Itens em Estoque</span>
+                <div class="metric-header">
+                    <span class="metric-label">Itens em Estoque</span>
+                    <div class="metric-icon-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m7.5 4.27 9 5.15"/>
+                            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                            <path d="m3.3 7 8.7 5 8.7-5"/>
+                            <path d="M12 22V12"/>
+                        </svg>
+                    </div>
+                </div>
                 <span class="metric-value" id="total-itens">0</span>
+                <span class="metric-caption">Unidades físicas armazenadas</span>
             </div>
+
             <div class="card metric-card">
-                <span class="metric-label">Valor Total do Estoque</span>
+                <div class="metric-header">
+                    <span class="metric-label">Valor Total do Estoque</span>
+                    <div class="metric-icon-box highlight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                </div>
                 <span class="metric-value highlight" id="valor-total">R$ 0,00</span>
+                <span class="metric-caption">Patrimônio acumulado em mercadorias</span>
             </div>
         </section>
 
         <!-- Formulário de Cadastro -->
         <section class="card form-card">
-            <h2>➕ Cadastrar Novo Produto</h2>
+            <div class="section-title-wrap">
+                <div class="icon-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2>Cadastrar Novo Produto</h2>
+                    <p class="section-subtitle">Informe os dados cadastrais do item e informações do fornecedor</p>
+                </div>
+            </div>
+
             <form id="form-produto">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="nome-produto">Nome do Produto *</label>
+                        <label for="nome-produto">Nome do Produto <span class="required">*</span></label>
                         <input type="text" id="nome-produto" placeholder="Ex: Caderno 10 matérias" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="preco-produto">Preço Unitário (R$) *</label>
-                        <input type="number" id="preco-produto" step="0.01" min="0" placeholder="Ex: 22.50" required>
+                        <label for="preco-produto">Preço Unitário (R$) <span class="required">*</span></label>
+                        <input type="number" id="preco-produto" step="0.01" min="0" placeholder="0,00" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="quantidade-produto">Quantidade em Estoque *</label>
-                        <input type="number" id="quantidade-produto" min="0" placeholder="Ex: 40" required>
+                        <label for="quantidade-produto">Quantidade em Estoque <span class="required">*</span></label>
+                        <input type="number" id="quantidade-produto" min="0" placeholder="0" required>
                     </div>
 
                     <div class="form-group">
@@ -61,21 +128,65 @@
 
                     <div class="form-group">
                         <label for="telefone-fornecedor">Telefone do Fornecedor</label>
-                        <input type="text" id="telefone-fornecedor" placeholder="Ex: (00) 00000-0000">
+                        <input type="text" id="telefone-fornecedor" placeholder="(00) 00000-0000">
                     </div>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
-                    <button type="reset" class="btn btn-secondary">Limpar Campos</button>
+                    <button type="submit" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/>
+                            <polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                        <span>Cadastrar Produto</span>
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                            <path d="M3 3v5h5"/>
+                        </svg>
+                        <span>Limpar Formulário</span>
+                    </button>
                 </div>
             </form>
         </section>
 
         <!-- Tabela de Produtos Cadastrados -->
         <section class="card table-card">
-            <div class="table-header">
-                <h2>📋 Produtos em Estoque</h2>
+            <div class="table-card-header">
+                <div class="section-title-wrap">
+                    <div class="icon-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                            <path d="M9 14h6"/>
+                            <path d="M9 18h6"/>
+                            <path d="M9 10h6"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>Produtos em Estoque</h2>
+                        <p class="section-subtitle">Acompanhe a disponibilidade, preços e fornecedores</p>
+                    </div>
+                </div>
+
+                <!-- Barra de Busca e Filtro de Status -->
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input type="text" id="busca-produto" placeholder="Buscar por produto ou fornecedor..." aria-label="Buscar produtos">
+                    </div>
+                    <select id="filtro-status" class="filter-select" aria-label="Filtrar por status">
+                        <option value="todos">Todos os Status</option>
+                        <option value="normal">Em Estoque</option>
+                        <option value="alerta">Estoque Baixo</option>
+                        <option value="esgotado">Esgotado</option>
+                    </select>
+                </div>
             </div>
             
             <div class="table-responsive">
@@ -83,12 +194,12 @@
                     <thead>
                         <tr>
                             <th>Produto</th>
-                            <th>Preço Unitário</th>
-                            <th>Quantidade</th>
+                            <th class="text-right">Preço Unitário</th>
+                            <th class="text-center">Quantidade</th>
                             <th>Status</th>
                             <th>Fornecedor</th>
                             <th>Contato</th>
-                            <th>Ações</th>
+                            <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody id="tabela-corpo">
@@ -97,21 +208,38 @@
                 </table>
             </div>
 
+            <!-- Estado Vazio -->
             <div id="empty-state" class="empty-state" style="display: none;">
-                <p>Nenhum produto cadastrado no momento.</p>
+                <div class="empty-icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/>
+                        <line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
+                <p class="empty-title">Nenhum produto encontrado</p>
+                <p class="empty-subtitle">Não há produtos correspondentes à busca ou cadastrados no sistema.</p>
+            </div>
+
+            <div class="table-footer-meta">
+                <span id="contagem-registros">Exibindo todos os produtos</span>
             </div>
         </section>
 
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>Controle de Estoque &copy; 2026 - Programação Orientada a Objetos</p>
+        <div class="container footer-container">
+            <p>Controle de Estoque &copy; 2026 &bull; Painel Corporativo</p>
+            <p class="footer-meta">Programação Orientada a Objetos</p>
         </div>
     </footer>
 
-    <!-- Lógica de interação simples para simular o sistema em tempo real -->
+    <!-- Contêiner de Notificações Flutuantes (Toast) -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Lógica de interação da interface -->
     <script src="app.js"></script>
 </body>
 </html>
-

@@ -1,0 +1,110 @@
+================================================================================
+ROTEIRO DE APRESENTAÇÃO RÁPIDA - SISTEMA DE CONTROLE DE ESTOQUE (POO - IFRN)
+Professora: Tatiana Amaral Sorrentino
+Equipe: Gian, Paulo, Heitor e Celine
+Arquivo de Slides: Apresentacao_Controle_Estoque.pdf
+================================================================================
+
+ESTRUTURA DA APRESENTAÇÃO:
+- Gian: Contextualização, Motivação e Regras de Negócio (Slides 1 a 4)
+- Paulo: Pilares de POO, Diagrama de Classes UML e Associação (Slides 5 a 7)
+- Heitor: Código das Classes Fornecedor e Produto (Slides 8 a 10)
+- Celine: Código da Main, Execução no Console e Conclusão (Slides 11 a 14)
+
+--------------------------------------------------------------------------------
+1. GIAN (Slides 1 a 4) - CONTEXTO, MOTIVAÇÃO E REGRAS
+--------------------------------------------------------------------------------
+[Slide 1 - Capa]
+"Bom dia, professora Tatiana e colegas. Nosso grupo é formado por mim (Gian),
+pelo Paulo, pelo Heitor e pela Celine. Vamos apresentar a 1ª Entrega de POO:
+o Sistema de Controle de Estoque em Java."
+
+[Slide 2 - O que foi feito?]
+"O nosso objetivo foi modelar e construir um sistema em Java para gerenciar
+o estoque de um comércio, focando na integridade dos dados e na separação de
+responsabilidades entre duas entidades centrais: Produto e Fornecedor."
+
+[Slide 3 - Motivação da Escolha]
+"Escolhemos esse tema por dois motivos: primeiro, a relevância prática, pois
+qualquer loja precisa controlar mercadorias para evitar rupturas ou prejuízos;
+segundo, a aderência perfeita a POO, já que o produto possui um fornecedor,
+permitindo aplicar encapsulamento e relacionamento de forma natural."
+
+[Slide 4 - Regras de Negócio e Funcionamento]
+"As regras são simples: o fornecedor é autônomo e pode abastecer vários produtos;
+o produto controla seu preço e saldo físico; e o método de exibição trata casos
+de produtos sem fornecedor inicial para evitar erros de execução.
+Agora o Paulo vai apresentar a modelagem e o diagrama UML."
+
+--------------------------------------------------------------------------------
+2. PAULO (Slides 5 a 7) - PILARES DE POO, DIAGRAMA UML E ASSOCIAÇÃO
+--------------------------------------------------------------------------------
+[Slide 5 - Pilares de POO]
+"Obrigado, Gian. No nosso projeto aplicamos com rigor os pilares exigidos:
+o Encapsulamento, onde todos os atributos são estritamente privados; a sobrecarga
+de construtores, com construtor padrão e parametrizado; e o relacionamento de
+associação entre classes."
+
+[Slide 6 - Diagrama de Classes UML]
+"Aqui no Slide 6 temos o Diagrama UML oficial. Notem o sinal de menos (-) nos
+atributos de Fornecedor e Produto, indicando visibilidade private, e o sinal
+de mais (+) nos construtores e métodos gets e sets públicos. A seta indica que
+um Fornecedor pode estar associado a zero ou vários produtos (0..*)."
+
+[Slide 7 - Relacionamento de Associação]
+"Optamos pela Associação em vez de colocar nome e telefone do fornecedor dentro
+de Produto para evitar redundância de dados: se tivermos 50 produtos da mesma
+distribuidora, reutilizamos a mesma instância do objeto na memória, garantindo
+baixo acoplamento. Passo agora a palavra ao Heitor para mostrar o código."
+
+--------------------------------------------------------------------------------
+3. HEITOR (Slides 8 a 10) - CÓDIGO DAS CLASSES DE DOMÍNIO
+--------------------------------------------------------------------------------
+[Slide 8 - Fornecedor.java]
+"Obrigado, Paulo. Na classe Fornecedor, os atributos 'nome' e 'telefone' são
+private. Criamos o construtor padrão vazio e o construtor parametrizado usando
+o 'this' para guardar os dados, além de todos os getters e setters exigidos."
+
+[Slide 9 - Produto.java (Atributos e Construtores)]
+"Na classe Produto, o grande destaque é o atributo 'private Fornecedor fornecedor',
+que é uma referência ao objeto da outra classe. Implementamos o construtor padrão
+e o construtor completo com 4 parâmetros para inicializar o produto já associado."
+
+[Slide 10 - Produto.java (Métodos e Regras)]
+"Além dos métodos gets e sets para todos os campos, temos o método exibirInformacoes().
+Nele usamos programação defensiva com 'if (fornecedor != null)' antes de chamar
+os getters do fornecedor, impedindo exceções de NullPointer caso o item ainda não
+tenha fornecedor. Agora a Celine vai demonstrar a execução na Main."
+
+--------------------------------------------------------------------------------
+4. CELINE (Slides 11 a 14) - CLASSE MAIN, EXECUÇÃO E CONCLUSÃO
+--------------------------------------------------------------------------------
+[Slide 11 - Main.java]
+"Obrigada, Heitor. Na classe Main testamos tudo na prática: criamos o fornecedor 'f1'
+e instanciamos dois produtos de formas diferentes de propósito: o caderno 'p1'
+usando o construtor parametrizado direto, e a caneta 'p2' usando o construtor
+padrão vazio e preenchendo os dados via setters, ambos reutilizando o mesmo 'f1'."
+
+[Slide 12 - Execução no Console]
+"Aqui vemos a saída real da JVM: cada produto imprime seus dados individuais e
+busca os contatos da Distribuidora Silva perfeitamente através da associação."
+
+[Slide 13 - Checklist de Critérios]
+"Comparamos nosso trabalho com todos os critérios da professora Tatiana:
+são 3 classes (Produto, Fornecedor e Main); encapsulamento 100% private;
+gets e sets completos; 2 construtores em cada classe; e relacionamento funcional."
+
+[Slide 14 - Conclusão]
+"Concluímos que a Orientação a Objetos nos permitiu criar um código muito mais
+organizado, seguro e pronto para futuras expansões com herança e polimorfismo.
+Agradecemos à professora Tatiana e a todos pela atenção. Muito obrigada!"
+
+================================================================================
+DICAS PARA A APRESENTAÇÃO:
+1. Tempo: cada um fala em média de 1 a 2 minutos em ritmo normal (~6 a 8 min total),
+   podendo pausar mais nos códigos se a professora fizer perguntas.
+2. Passagem de fala: sempre chame o próximo colega pelo nome ao terminar.
+3. Se a professora pedir para ver funcionando: basta abrir o prompt e rodar
+   'java Main' ou mostrar o PDF gerado.
+================================================================================
+
